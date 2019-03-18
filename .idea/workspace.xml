@@ -2,7 +2,6 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="d2b69dd3-c648-40d2-bb2b-1fad00fdcbfd" name="Default" comment="">
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/test/java/com/webucation/FaxuanLoginTest.java" afterPath="$PROJECT_DIR$/src/test/java/com/webucation/FaxuanLoginTest.java" />
     </list>
     <ignored path="$PROJECT_DIR$/out/" />
@@ -20,8 +19,8 @@
       <file leaf-file-name="FaxuanLoginTest.java" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/src/test/java/com/webucation/FaxuanLoginTest.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="459">
-              <caret line="23" column="5" lean-forward="true" selection-start-line="23" selection-start-column="5" selection-end-line="23" selection-end-column="5" />
+            <state relative-caret-position="432">
+              <caret line="22" column="32" lean-forward="true" selection-start-line="22" selection-start-column="32" selection-end-line="22" selection-end-column="32" />
               <folding />
             </state>
           </provider>
@@ -423,7 +422,7 @@
       <workItem from="1550045405613" duration="5489000" />
       <workItem from="1550129844905" duration="15000" />
       <workItem from="1552882956682" duration="8100000" />
-      <workItem from="1552891370337" duration="2231000" />
+      <workItem from="1552891370337" duration="2833000" />
     </task>
     <servers />
   </component>
@@ -460,7 +459,7 @@
     </history-entry>
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="15835000" />
+    <option name="totallyTimeSpent" value="16437000" />
   </component>
   <component name="TodoView">
     <todo-panel id="selected-file">
@@ -725,8 +724,8 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/src/test/java/com/webucation/FaxuanLoginTest.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="459">
-          <caret line="23" column="5" lean-forward="true" selection-start-line="23" selection-start-column="5" selection-end-line="23" selection-end-column="5" />
+        <state relative-caret-position="432">
+          <caret line="22" column="32" lean-forward="true" selection-start-line="22" selection-start-column="32" selection-end-line="22" selection-end-column="32" />
           <folding />
         </state>
       </provider>

@@ -9,7 +9,7 @@ import org.junit.Test;
 import java.util.Scanner;
 
 /**
- * 测试1111
+ * 测试
  */
 public class FaxuanLoginTest {
 
