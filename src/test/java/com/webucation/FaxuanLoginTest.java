@@ -9,7 +9,7 @@ import org.junit.Test;
 import java.util.Scanner;
 
 /**
- * Unit test for simple LoginBase.
+ * 测试
  */
 public class FaxuanLoginTest {
 
