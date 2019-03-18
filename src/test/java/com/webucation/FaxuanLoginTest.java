@@ -13,8 +13,8 @@ import java.util.Scanner;
  */
 public class FaxuanLoginTest {
 
-    @Test
-    public void login() {
+
+    public static void login() {
         FaxuanLogin faxuanLogin = FaxuanLogin.create();
 
         faxuanLogin.showVerifyImage();//显示验证码图片
@@ -22,4 +22,9 @@ public class FaxuanLoginTest {
         Result res = faxuanLogin.login("5306011270065", "zhu669811", scanner.next());
         System.out.println(res);
     }
+
+    public static void main(String[] args) {
+        login();
+    }
+
 }
