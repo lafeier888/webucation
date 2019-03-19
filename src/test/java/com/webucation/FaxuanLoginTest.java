@@ -17,25 +17,24 @@ import java.util.Scanner;
 public class FaxuanLoginTest {
 
 
-    public static FaxuanUserInfo login() {
+    public static FaxuanResult login() {
         FaxuanLogin faxuanLogin = FaxuanLogin.create();
 
         faxuanLogin.showVerifyImage();//显示验证码图片
         Scanner scanner = new Scanner(System.in);//输入验证码
-        Result res = faxuanLogin.login("5306011270065", "zhu669811", scanner.next());
+        Result res = faxuanLogin.login("5206100080783", "zxl123456", scanner.next());
 
-        FaxuanResult faxuanResult = JSON.parseObject(res.getData().toString(),FaxuanResult.class);
-        FaxuanUserInfo faxuanUserInfo = JSON.parseObject(faxuanResult.getData(), FaxuanUserInfo.class);
-        return faxuanUserInfo;
+        FaxuanResult faxuanResult = JSON.parseObject(res.getData().toString(), FaxuanResult.class);
+//        FaxuanUserInfo faxuanUserInfo = JSON.parseObject(faxuanResult.getData(), FaxuanUserInfo.class);
+        return faxuanResult;
     }
 
     public static void main(String[] args) {
-        FaxuanUserInfo faxuanUserInfo = login();
+        FaxuanResult faxuanResult = login();//登录
+        FaxuanUserInfo faxuanUserInfo = faxuanResult.getData();//获取用户信息
         Faxuanlearn faxuanlearn = new Faxuanlearn(faxuanUserInfo);
-        faxuanlearn.getScore();
-
-//        FaxuanUserInfo faxuanUserInfo = JSON.parseObject("{'todayapoint':10}", FaxuanUserInfo.class);
-//        System.out.println(faxuanUserInfo);
+        faxuanlearn.getScore();//获取积分
+        System.out.println(faxuanResult);
     }
 
 }

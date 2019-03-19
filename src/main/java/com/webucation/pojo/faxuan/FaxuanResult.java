@@ -3,8 +3,16 @@ package com.webucation.pojo.faxuan;
 public class FaxuanResult {
     private int code;
     private String msg;
-    private String data;
+    private FaxuanUserInfo data;
 
+    @Override
+    public String toString() {
+        return "FaxuanResult{" +
+                "code=" + code +
+                ", msg='" + msg + '\'' +
+                ", data=" + data +
+                '}';
+    }
 
     public int getCode() {
         return code;
@@ -22,11 +30,11 @@ public class FaxuanResult {
         this.msg = msg;
     }
 
-    public String getData() {
+    public FaxuanUserInfo getData() {
         return data;
     }
 
-    public void setData(String data) {
+    public void setData(FaxuanUserInfo data) {
         this.data = data;
     }
 }
