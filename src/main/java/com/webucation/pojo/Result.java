@@ -4,6 +4,14 @@ public class Result {
     Boolean success = null;
     Object data = null;
 
+    public Result(Boolean success, Object data) {
+        this.success = success;
+        this.data = data;
+    }
+
+    public Result() {
+    }
+
     @Override
     public String toString() {
         return "Result{" +

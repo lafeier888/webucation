@@ -1,4 +1,4 @@
-package com.webucation.pojo;
+package com.webucation.pojo.faxuan;
 
 public class FaxuanUserInfo {
     private String userHeaduploads;

@@ -1,6 +1,7 @@
-package com.webucation.impl;
+package com.webucation.impl.faxuan;
 
 import com.webucation.LoginBase;
+import com.webucation.impl.OkHttpClientFactory;
 import com.webucation.pojo.Result;
 import com.webucation.util.CookieParse;
 import okhttp3.*;
@@ -15,15 +16,11 @@ import java.net.InetSocketAddress;
 import java.net.Proxy;
 import java.util.HashMap;
 import java.util.Map;
-import java.util.Scanner;
 
 public class FaxuanLogin implements LoginBase {
 
-    //代理，用于抓包测试
-    private static Proxy proxy = new Proxy(Proxy.Type.HTTP, new InetSocketAddress("192.168.140.1", 8888));
 
-
-    private static OkHttpClient client = new OkHttpClient().newBuilder().followRedirects(false).build();
+    private static OkHttpClient client = OkHttpClientFactory.getInstance();
 
     //登录接口地址
     private static String loginUrl = "http://www.faxuan.net/bss/xfservice/userService!doUserLogin.do?";
@@ -35,15 +32,20 @@ public class FaxuanLogin implements LoginBase {
 
     static {
         System.out.println("正在使用：法宣在线登录接口！");
-        getRid();
+        getCookieRid();
     }
 
     private FaxuanLogin() {
 
     }
 
+    public static String getRid() {
+        return rid;
+    }
+
     /**
      * 获取登录对象（单例）
+     *
      * @return
      */
     public static FaxuanLogin create() {
@@ -57,9 +59,10 @@ public class FaxuanLogin implements LoginBase {
 
     /**
      * 登录接口
+     *
      * @param username 账号
-     * @param password  密码
-     * @param code 验证码
+     * @param password 密码
+     * @param code     验证码
      * @return 成功返回用户信息，错误返回空
      */
     @Override
@@ -82,7 +85,9 @@ public class FaxuanLogin implements LoginBase {
                 .build();
 
         Result result = new Result();
-        try (Response response = client.newCall(request).execute()) {
+        Response response = null;
+        try {
+            response = client.newCall(request).execute();
             String resText = response.body().string();
             result.setData(resText);
             result.setSuccess(true);
@@ -92,17 +97,20 @@ public class FaxuanLogin implements LoginBase {
             result.setData("访问失败！");
             result.setSuccess(false);
             return result;
+        } finally {
+            response.close();
         }
     }
 
     /**
      * 获取rid，内部方法，不应该客户端调用
      */
-    private static String getRid() {
+    private static String getCookieRid() {
         String url = "http://www.faxuan.net/bps/site/11.html";
         Request request = new Request.Builder().url(url).get().build();
+        Response response = null;
         try {
-            Response response = client.newCall(request).execute();
+            response = client.newCall(request).execute();
             String setcookie = response.header("Set-Cookie");
             String rid = CookieParse.parse(setcookie).get("rid");
             FaxuanLogin.rid = rid;
@@ -111,11 +119,14 @@ public class FaxuanLogin implements LoginBase {
             System.out.println("请求rid错误！");
             e.printStackTrace();
             return null;
+        }finally {
+            response.close();
         }
     }
 
     /**
      * 获取验证码图片
+     *
      * @return
      */
     public InputStream getVerifycodeImage() {
@@ -123,14 +134,17 @@ public class FaxuanLogin implements LoginBase {
         String imageUrl = "http://xf.faxuan.net/service/gc.html";
         Request request = new Request.Builder().url(imageUrl).header("cookie", "rid=" + rid).get().build();
         Response response = null;
+        InputStream inputStream = null;
         try {
             response = client.newCall(request).execute();
+            inputStream = response.body().byteStream();
         } catch (IOException e) {
             System.out.println("请求验证码错误！");
             e.printStackTrace();
             return null;
+        }finally {
+            //response.close();
         }
-        InputStream inputStream = response.body().byteStream();
         return inputStream;
     }
 

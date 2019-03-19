@@ -2,9 +2,12 @@ package com.webucation;
 
 import static org.junit.Assert.assertTrue;
 
-import com.webucation.impl.FaxuanLogin;
+import com.alibaba.fastjson.JSON;
+import com.webucation.impl.faxuan.FaxuanLogin;
+import com.webucation.impl.faxuan.Faxuanlearn;
+import com.webucation.pojo.faxuan.FaxuanResult;
+import com.webucation.pojo.faxuan.FaxuanUserInfo;
 import com.webucation.pojo.Result;
-import org.junit.Test;
 
 import java.util.Scanner;
 
@@ -14,17 +17,25 @@ import java.util.Scanner;
 public class FaxuanLoginTest {
 
 
-    public static void login() {
+    public static FaxuanUserInfo login() {
         FaxuanLogin faxuanLogin = FaxuanLogin.create();
 
         faxuanLogin.showVerifyImage();//显示验证码图片
         Scanner scanner = new Scanner(System.in);//输入验证码
         Result res = faxuanLogin.login("5306011270065", "zhu669811", scanner.next());
-        System.out.println(res);
+
+        FaxuanResult faxuanResult = JSON.parseObject(res.getData().toString(),FaxuanResult.class);
+        FaxuanUserInfo faxuanUserInfo = JSON.parseObject(faxuanResult.getData(), FaxuanUserInfo.class);
+        return faxuanUserInfo;
     }
 
     public static void main(String[] args) {
-        login();
+        FaxuanUserInfo faxuanUserInfo = login();
+        Faxuanlearn faxuanlearn = new Faxuanlearn(faxuanUserInfo);
+        faxuanlearn.getScore();
+
+//        FaxuanUserInfo faxuanUserInfo = JSON.parseObject("{'todayapoint':10}", FaxuanUserInfo.class);
+//        System.out.println(faxuanUserInfo);
     }
 
 }
